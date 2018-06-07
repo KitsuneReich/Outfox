@@ -22,16 +22,10 @@ isAdjacent = function(characterGroup, subject){
             //DISPLAY INFORMATION
             if(subject.controlled == true){
             //Keyboard input only available when adjacent
-            if (character.charb == true && character.EXH > 0) {
+            if (cKey.justPressed() && subject.EXH > 0) {
                 //Exhaust Player
-                character.EXH -= 1;
-                character.charb = false;
-
-            //if (cKey.justPressed() && subject.EXH > 0) {
-                //Exhaust Player
-               // subject.EXH -= 1;
+                subject.EXH -= 1;
                 
-
                 //Display GameLog
                 gameLog.setText('"What\'s a fox like you doing in a place like this"');
                 
@@ -59,15 +53,10 @@ isAdjacent = function(characterGroup, subject){
                 //useAction()
                 game.time.events.add(Phaser.Timer.SECOND * 4, useAction, this);
             }
-            if (character.sarcb == true && character.EXH > 0) {
+            if (sKey.justPressed() && subject.EXH > 0) {
                 //Exhaust Player
-                character.EXH -= 1;
-                character.sarcb = false;
-            //if (sKey.justPressed() && subject.EXH > 0) {
-                //Exhaust Player
-              //  subject.EXH -= 1;
+                subject.EXH -= 1;
                 
-
                 //Display GameLog
                 gameLog.setText('"Don\'t you just love eating dog food every day?"');
                 
