@@ -49,7 +49,7 @@ create: function() {
     wordWrapWidth: '500',
     wordWrap: 'true'
     };
-    creditText = game.add.text(300,50, 'Thank you text here', creditStyle);
+    creditText = game.add.text(300,50, 'Nathan Altice\nElizabeth Swensen\nYi Yin - Dialogue System', creditStyle);
 
     creditText = game.add.text(58,200, 'Nichole Boothroyd', creditStyle);
     creditText = game.add.text(73,235, 'Courtney Hunt', creditStyle);
