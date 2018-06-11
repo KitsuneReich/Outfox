@@ -422,12 +422,7 @@ function switchScene(num) {
     scene = game.add.sprite(0,0,scenes[num].key);
     scene.alpha = 0;
     game.add.tween(scene).to( { alpha: 1 }, 1500, Phaser.Easing.Linear.None, true);
-    /*if (num > 0 && num < scenes.length - 1) {
-        logImg = game.add.sprite(79,306,'logImg');   
-    }*/
-    //talkText = game.add.text(108, 315, narratives[num], { font: 'Fira Sans', fontSize: '16px', fill: '#eed6c3', wordWrapWidth: '440', wordWrap: 'true' });
-    //talkText.alpha = 0;
-    //game.add.tween(talkText).to( { alpha: 1 }, 1500, Phaser.Easing.Linear.None, true);
+    var talkText = game.add.text(320, 440, 'Press [ENTER] to skip narrative', { font: 'Fira Sans', fontSize: '16px', fill: '#eed6c3', wordWrapWidth: '440', wordWrap: 'true' });
     startScene++;
 
         
