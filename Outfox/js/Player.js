@@ -176,6 +176,8 @@ Player.prototype.update = function() {
       'Resolve: ' + this.EXH + '\n'
       ;
       if (turnPC == false) {
+            this.soundDown = game.add.audio('select');
+            this.soundDown.play('', 0, 1, false);
             add2Log('Zerda\'s turn.', 1);
             turnPC = true;
       }

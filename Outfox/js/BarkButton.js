@@ -67,10 +67,16 @@ barkButton.prototype.update = function() {
 				}else if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)){
 					if(enemy.adj == true || BFF.adj == true || enemy2.adj == true){
 						add2Log('Bark Action: [UP] or [DOWN] to hover over a bark type. [SPACE] to perform.', 2);
-					} else if (enemy.adj == false || enemy2.adj == false){
+						this.soundDown = game.add.audio('up');
+        				this.soundDown.play('', 0, 0.25, false);
+					} else if (Player.controlled == true && enemy.adj == false || enemy2.adj == false){
 						add2Log('In order to use a Bark Action, Zerda needs to be adjacent to an unfamiliar fox.', 2);
-					} else if (BFF.adj == false) {
+						this.soundDown = game.add.audio('down');
+        				this.soundDown.play('', 0, 0.25, false);
+					} else if (BFF.displayed == true && BFF.adj == false) {
 						add2Log('In order to use a Bark Action, Tod needs to be adjacent to Zerda.', 2);
+						this.soundDown = game.add.audio('down');
+        				this.soundDown.play('', 0, 0.25, false);
 					}
 					if(BFF.displayed == true && BFF.adj == true){
 						subMenu(game, BFF);

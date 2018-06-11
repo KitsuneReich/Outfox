@@ -90,6 +90,8 @@ Enemy.prototype.update = function() {
             enemyTarget.loadTexture('UI','s_activeFox');
             enemyUI.visible = true;
             if(turnText == false){
+                this.soundDown = game.add.audio('select');
+                this.soundDown.play('', 0, 1, false);
                 add2Log(this.NAME +'\'s turn.', 1);
                 turnText = true;
             }

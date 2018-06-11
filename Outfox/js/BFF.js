@@ -178,6 +178,8 @@ Bff.prototype.update = function() {
         'Resolve: ' + this.EXH + '\n'
         ;
         if (turnBFF == false){
+            this.soundDown = game.add.audio('select');
+            this.soundDown.play('', 0, 1, false);
             add2Log('Tod\'s turn.', 1);
             turnBFF = true;
         }

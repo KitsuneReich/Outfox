@@ -51,6 +51,8 @@ moveButton.prototype.update = function() {
 						this.usable = false;
 					}else if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)){
 						add2Log('Move Action: [UP], [DOWN], [LEFT], or [RIGHT] to move 1 space. Immediately takes effect.', 3);
+						this.soundDown = game.add.audio('up');
+        				this.soundDown.play('', 0, 0.25, false);
 						if(BFF.displayed == true){
 							BFF.moveable = true;
 							this.unusable = true;

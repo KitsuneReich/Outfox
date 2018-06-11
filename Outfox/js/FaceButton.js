@@ -54,6 +54,8 @@ faceButton.prototype.update = function() {
 					this.usable = false;
 				}else if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)){
 					add2Log('Face Action: [UP], [DOWN], [LEFT], or [RIGHT] to choose a direction to face. Immediately takes effect. May be used multiple times.', 4);
+					this.soundDown = game.add.audio('up');
+        			this.soundDown.play('', 0, 0.25, false);
 					if(player.displayed == true){
 						console.log("facing a way kinda")
 						this.faceb = 'player';

@@ -75,7 +75,8 @@ Preloader.prototype = {
             
             //MUSIC
             game.load.path = 'assets/audio/';
-            //Song obtained from:: freesound.org/people/dobroide/sounds/34580/
+            // songs and sounds obtained from freesound.org
+            // fox sounds from Courtney Hunts fox videos
             game.load.audio('bgMusic',['BGMusic.mp3']);
             game.load.audio('logoSound',['logoSound.mp3']);
             game.load.audio('charSound',['gekkering01.mp3']);
@@ -85,6 +86,21 @@ Preloader.prototype = {
             game.load.audio('uhOh',['uhoh.mp3']);
             game.load.audio('cage',['cage.mp3']);
             game.load.audio('piano',['pianoloop.mp3']);
+            game.load.audio('BFF',['BFF.mp3']);
+            game.load.audio('slam',['cageslam.mp3']);
+            game.load.audio('chains',['chains.mp3']);
+            game.load.audio('chew',['chewing.mp3']);
+            game.load.audio('drink',['drinking.mp3']);
+            game.load.audio('earshake',['earshake.mp3']);
+            game.load.audio('growlNo',['growlNo.mp3']);
+            game.load.audio('hmph',['hmph.mp3']);
+            game.load.audio('sleeping',['sleeping.mp3']);
+            game.load.audio('sniff',['sniffing.mp3']);
+            game.load.audio('yawn',['yawn.mp3']);
+            game.load.audio('gekker',['gekkering02.mp3']);
+            game.load.audio('up',['UpSound.mp3']);
+            game.load.audio('down',['DownSound.mp3']);
+            game.load.audio('select',['select.mp3']);
 
         },
         create: function(){
@@ -208,28 +224,50 @@ Prologue.prototype = {
         var proBG = game.add.sprite(0, 0, 'prolBorder');
         proBG.alpha = 0;
 
+        // ease in background image
         game.add.tween(proBG).to( { alpha: 1 }, 1500, Phaser.Easing.Linear.None, true);
-
         console.log('Prologue: create');
         game.stage.backgroundColor = "#ffffff";
         console.log('level: ' + this.level);
 
+        // Prologue narrative timed sounds
         this.logoUp = game.add.audio('birdGuitar');
-        game.time.events.add(1500, logoSound, this);
+        game.time.events.add(1500, playSound, this);
+        function playSound() {this.logoUp.play('', 0, 1, false);}
 
-        function logoSound() {
-            this.logoUp.play('', 0, 0.5, false);
-        }
+        this.sleepUp = game.add.audio('sleeping');
+        game.time.events.add(1300, sleepSound, this);
+        function sleepSound() {this.sleepUp.play('', 0, 0.4, false);}
+
+        this.yawnUp = game.add.audio('yawn');
+        game.time.events.add(3750, yawnSound, this);
+        function yawnSound() {this.yawnUp.play('', 0, 0.3, false);}
+
+        this.drinkUp = game.add.audio('drink');
+        game.time.events.add(7500, drinkSound, this);
+        function drinkSound() {this.drinkUp.play('', 0, 1, false);}
+
+        this.sniffUp = game.add.audio('sniff');
+        game.time.events.add(10500, sniffSound, this);
+        function sniffSound() {this.sniffUp.play('', 0, 0.5, false);}
+
+        this.chewUp = game.add.audio('chew');
+        game.time.events.add(15750, chewSound, this);
+        function chewSound() {this.chewUp.play('', 0, 0.25, false);}
+
+        this.chainsUp = game.add.audio('chains');
+        game.time.events.add(20000, chainsSound, this);
+        function chainsSound() {this.chainsUp.play('', 0, 0.5, false);}
+
+        this.slamUp = game.add.audio('slam');
+        game.time.events.add(20500, slamSound, this);
+        function slamSound() {this.slamUp.play('', 0, 0.35, false);}
 
         this.cageDown = game.add.audio('uhOh');
         game.time.events.add(21500, cageSound, this);
+        function cageSound() {this.cageDown.play('', 0, 0.5, false);}
 
-        function cageSound() {
-            this.cageDown.play('', 0, 0.5, false);
-        }
-
-        
-
+        // Prologue comic panel fade in timing
         var panel00 = game.add.sprite(10, 10, 'panel00');
         var panel01 = game.add.sprite(101, 10, 'panel01');
         var panel02 = game.add.sprite(414, 10, 'panel02');
@@ -243,9 +281,7 @@ Prologue.prototype = {
 
         var i = 0;
         panels.forEach(function(panel) {
-
             panel.alpha = 0;
-
             game.time.events.add(1000 + (i * 3000), fadePanel, this, panel);
             i++;
 
@@ -257,7 +293,7 @@ Prologue.prototype = {
 
     },
     update: function() {
-        // main menu logic
+        // skip prologue
         if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
             // pass this.level to next state
             game.state.start('BFFmeet');
@@ -273,20 +309,19 @@ BFFmeet.prototype = {
         },
         create: function() {
             console.log('BFFmeet: create');
-
+            // html css background call to change color
             setBgColorById('main-page','#000000');
             setBgImageById('main-page','');
             game.sound.stopAll();
 
             game.stage.backgroundColor = "#000000";
-            //switchScene(startScene);
             
             //RESET FREEFOX
             freeFox = [false,false,false];
             //RESET ESCAPE ROUTE TEXT
             displayText = true;
 
-            // establish a dialog component
+            // establish a dialog component - Yi Yin's dialogue code
             var dialog=new Dialog(
             {x:108, y:315, width:435}, // the geo of the dialog box
             { font: 'Fira Sans', fontSize: '16px', fill: '#eed6c3', wordWrap: 'true', boundsAlignH: "left", boundsAlignV: "top" } // the style of the text
@@ -354,78 +389,107 @@ BFFmeet.prototype = {
             ],
             function(){console.log("all text in the list has been played!")}
             );
-
         controller.playNext();
 
         _setupKeys(controller);
 
-// private functions
-function _setupKeys(controller){
-    enterKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-    enterKey.onUp.add(function(){
-        console.log("Space pressed!");
-        this.playNext();
-    }, controller);
-}
+        // private functions
+        function _setupKeys(controller){
+            enterKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+            enterKey.onUp.add(function(){
+            console.log("Space pressed!");
+            this.playNext();
+        }, controller);
+    }
 
-            
-            
-            this.logoUp = game.add.audio('piano');
-            game.time.events.add(1500, logoSound, this);
-
-            function logoSound() {
-                this.logoUp.play('', 0, 0.5, true);
-            }
-
-            this.cageDown = game.add.audio('cage');
-
-            function cageSound() {
-                this.cageDown.play('', 0, 0.5, false);
-            }
-
+        // sad piano music loop
+        this.logoUp = game.add.audio('piano');
+        game.time.events.add(1500, logoSound, this);
+        function logoSound() {this.logoUp.play('', 0, 0.5, true);}
+        
         },
+
         update: function(){
-            if( game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR) ){
-                if (startScene < scenes.length) {
-                    //game.add.tween(scene).to( { alpha: 0 }, 1500, Phaser.Easing.Linear.None, true);
-                    //talkText.alpha = 0;
-                    //switchScene(startScene);
-                }
-                if(startScene == (scenes.length - 1)) {
-                    //talkText.kill();
-                    //logImg.kill();
-                    //game.add.tween(talkText).to( { alpha: 0 }, 1000, Phaser.Easing.Linear.None, true);
-                    //game.time.events.add(4000, changeState, this, 'test');
-                    //ame.add.tween(--scene).to( { alpha: 0 }, 1500, Phaser.Easing.Linear.None, true);
-                }
-            }
-            //console.log('MainMenu: test');
+            // ENTER to skip BFFMeet narrative altogether
             if(this.cache.isSoundDecoded('bgMusic') && game.input.keyboard.justPressed(Phaser.Keyboard.ENTER) ){
                 this.state.start('test');
             }
         },
-
-
 }
+// function to switch between background images for narrative scene
 function switchScene(num) {
     console.log('Scene switch start. startScene: ' + startScene);
-    this.cageDown = game.add.audio('cage');
-    if (num == 3){
-        this.cageDown.play('', 0, 0.5, false);
+    // if on certain scenes, play sounds, change music, or set html css background color
+    if (num == 1){
+        this.hmphDown = game.add.audio('hmph');
+        function hmphSound() {this.hmphDown.play('', 0, 0.1, false);}
+        game.time.events.add(3750, hmphSound, this);
     }
-    if (num == 4) {
+    this.cageDown = game.add.audio('cage');
+    if (num == 3){this.cageDown.play('', 0, 0.5, false);}
+    if (num == 4){
         setBgColorById('main-page','#242323');
+        this.shakeDown = game.add.audio('earshake');
+        function shakeSound() {this.shakeDown.play('', 0, 0.3, false);}
+        game.time.events.add(500, shakeSound, this);
+        this.gekkerDown = game.add.audio('gekker');
+        function gekkerSound() {this.gekkerDown.play('', 0, 0.7, false);}
+        game.time.events.add(8750, gekkerSound, this);
+    }
+    if (num == 5){
+        this.growlDown = game.add.audio('growlNo');
+        function growlSound() {this.growlDown.play('', 0, 0.3, false);}
+        game.time.events.add(4250, growlSound, this);
+    }
+    if (num == 6){
+        this.growlDown = game.add.audio('boostSound');
+        function growlSound() {this.growlDown.play('', 0, 0.3, false);}
+        game.time.events.add(4500, growlSound, this);
+    }
+    if (num == 7){
+        this.growlDown = game.add.audio('gekker');
+        function growlSound() {this.growlDown.play('', 0, 0.7, false);}
+        game.time.events.add(7000, growlSound, this);
     }
     if (num == 8) {
         setBgColorById('main-page','#615f5f');
+        this.yawnUp = game.add.audio('yawn');
+        game.time.events.add(0, yawnSound, this);
+        function yawnSound() {this.yawnUp.play('', 0, 0.1, false);}
+        this.growlDown = game.add.audio('charSound');
+        function growlSound() {this.growlDown.play('', 0, 0.7, false);}
+        game.time.events.add(3000, growlSound, this);
+    }
+    if (num == 9) {
+        this.yawnUp = game.add.audio('boostSound');
+        game.time.events.add(500, yawnSound, this);
+        function yawnSound() {this.yawnUp.play('', 0, 0.3, false);}
+        this.growlDown = game.add.audio('charSound');
+        function growlSound() {this.growlDown.play('', 0, 0.7, false);}
+        game.time.events.add(3250, growlSound, this);
+    }
+    if (num == 10) {
+        this.yawnUp = game.add.audio('gekker');
+        game.time.events.add(2500, yawnSound, this);
+        function yawnSound() {this.yawnUp.play('', 0, 0.7, false);}
+        this.growlDown = game.add.audio('growlNo');
+        function growlSound() {this.growlDown.play('', 0, 0.35, false);}
+        game.time.events.add(5500, growlSound, this);
+    }
+    if (num == 11) {
+        this.yawnUp = game.add.audio('charSound');
+        game.time.events.add(1500, yawnSound, this);
+        function yawnSound() {this.yawnUp.play('', 0, 0.7, false);}
     }
     scene = game.add.sprite(0,0,scenes[num].key);
     scene.alpha = 0;
     game.add.tween(scene).to( { alpha: 1 }, 1500, Phaser.Easing.Linear.None, true);
-    var talkText = game.add.text(320, 440, 'Press [ENTER] to skip narrative', { font: 'Fira Sans', fontSize: '16px', fill: '#eed6c3', wordWrapWidth: '440', wordWrap: 'true' });
+    if (num == 12){
+    } else {
+        var talkText = game.add.text(320, 440, 'Press [ENTER] to skip narrative', { font: 'Fira Sans', fontSize: '16px', fill: '#eed6c3', wordWrapWidth: '440', wordWrap: 'true' });
+    }
     startScene++;
 
-        
 }
 
 var testState = function(game) {};
