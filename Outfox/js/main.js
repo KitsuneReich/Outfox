@@ -17,7 +17,7 @@ var scenes = [{key:"BFF00"},{key:"BFF01"},{key:"BFF01"},{key:"BFF02"},{key:"BFF0
 var talkText;
 var logImg;
 //Array for credits: Who to display as recruited
-var freeFox = [false,false,false,false];
+var freeFox = [false,false,false];
 var namePC = '';
 var gameLog;
 var displayText;
@@ -281,7 +281,7 @@ BFFmeet.prototype = {
             //switchScene(startScene);
             
             //RESET FREEFOX
-            freeFox = [false,false,false,false];
+            freeFox = [false,false,false];
             //RESET ESCAPE ROUTE TEXT
             displayText = true;
 
@@ -690,11 +690,9 @@ Congrats.prototype = {
         var fox02 = game.add.sprite(415, 150, 'fox02');
         game.add.sprite(415, 250, 'fox00');
         var fox03 = game.add.sprite(415, 250, 'fox03');
-        game.add.sprite(415, 350, 'fox00');
-        var fox04 = game.add.sprite(415, 350, 'fox04');
         
-        var foxes = [fox01,fox02,fox03,fox04];
-        var bars = [bar01,bar02,bar03,bar04];
+        var foxes = [fox01,fox02,fox03];
+        var bars = [bar01,bar02,bar03];
 
         var i = 0;
         foxes.forEach(function(fox) {
