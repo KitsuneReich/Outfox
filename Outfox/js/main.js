@@ -680,7 +680,7 @@ Congrats.prototype = {
         var name02 = game.add.text(330, 244, enemy.NAME, { font: 'Fira Sans', fontSize: '18px', fill: '#eed6c3', fontWeight: '700' })
         var name03 = game.add.text(330, 344, enemy2.NAME, { font: 'Fira Sans', fontSize: '18px', fill: '#eed6c3', fontWeight: '700' })
         
-        var names = [name01,name02,name03,name04];
+        var names = [name01,name02,name03];
 
         game.add.sprite(415, 50, 'fox00');
         var fox01 = game.add.sprite(415, 50, 'fox01');
