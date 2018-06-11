@@ -670,18 +670,15 @@ Congrats.prototype = {
         game.add.sprite(320, 135, 'barRed');
         game.add.sprite(320, 235, 'barRed');
         game.add.sprite(320, 335, 'barRed');
-        game.add.sprite(320, 435, 'barRed');
 
         var bar01 = game.add.sprite(320, 135, 'barGreen');
         var bar02 = game.add.sprite(320, 235, 'barGreen');
         var bar03 = game.add.sprite(320, 335, 'barGreen');
-        var bar04 = game.add.sprite(320, 435, 'barGreen');
 
         var name01 = game.add.text(330, 144, BFF.NAME, { font: 'Fira Sans', fontSize: '18px', fill: '#eed6c3', fontWeight: '700' })
         var name02 = game.add.text(330, 244, enemy.NAME, { font: 'Fira Sans', fontSize: '18px', fill: '#eed6c3', fontWeight: '700' })
         var name03 = game.add.text(330, 344, enemy2.NAME, { font: 'Fira Sans', fontSize: '18px', fill: '#eed6c3', fontWeight: '700' })
-        var name04 = game.add.text(330, 444, 'PC Name', { font: 'Fira Sans', fontSize: '18px', fill: '#eed6c3', fontWeight: '700' })
-
+        
         var names = [name01,name02,name03,name04];
 
         game.add.sprite(415, 50, 'fox00');
