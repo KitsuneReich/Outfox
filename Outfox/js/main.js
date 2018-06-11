@@ -13,7 +13,7 @@ var logoSound;
 var startScene = 0;
 var panelTime = 4;
 var scene;
-var scenes = [{key:"BFF00"},{key:"BFF01"},{key:"BFF01"},{key:"BFF02"},{key:"BFF03"},{key:"BFF05"},{key:"BFF06"},{key:"BFF07"},{key:"BFF08"},{key:"BFF09"},{key:"BFF09"},{key:"BFF09"},{key:"BFF11"},{key:"BFF12"}];
+var scenes = [{key:"BFF00"},{key:"BFF01"},{key:"BFF01"},{key:"BFF02"},{key:"BFF03"},{key:"BFF05"},{key:"BFF06"},{key:"BFF07"},{key:"BFF08"},{key:"BFF09"},{key:"BFF09"},{key:"BFF12"},{key:"BFF11"}];
 var talkText;
 var logImg;
 //Array for credits: Who to display as recruited
@@ -59,6 +59,7 @@ Preloader.prototype = {
             this.load.image('BFF09', 's_BFF09.png');
             this.load.image('BFF10', 's_BFF10.png');
             this.load.image('BFF11', 's_BFF11.png');
+            this.load.image('BFF12', 's_BFF12.png');
             this.load.image('BFF12', 'Mockup.png');
             this.load.image('logImg', 's_BFFlog.png');
             this.load.image('Congrats', 's_congrats.png');
